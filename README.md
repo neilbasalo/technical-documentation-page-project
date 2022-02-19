@@ -1,8 +1,6 @@
 # technical-documentation-page
 
-Technical Documentation Page Project for freeCodeCamp
-
-I made an "Introduction to Gulp" Technical Documentation using HTML & CSS.
+"Introduction to Gulp" Technical Documentation Page Project using HTML & CSS.
 
 You can check it out here:
 
