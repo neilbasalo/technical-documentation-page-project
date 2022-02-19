@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to Gulp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  </head>
+  <body>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    <nav id="navbar">
+        <header>Introduction to Gulp</header>
+        <ul>
+          <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+          <li><a class="nav-link" href="#What_is_gulp?">What is gulp?</a></li>
+          <li><a class="nav-link" href="#How_to_set_up_gulp">How to set up gulp</a></li>
+          <li><a class="nav-link" href="#Creating_tasks">Creating tasks</a></li>
+          <li><a class="nav-link" href="#Examples">Examples</a></li>
+        </ul>
+      </nav>
+    <main id="main-doc">
+      <section class="main-section" id="Introduction">
+        <!-- I N T R O D U C T I O N       -->
+        <header>Introduction</header>
+        <article>
+          <p>
+            Modern web development has many repetitive tasks like running a
+            local server, minifying code, optimizing images, preprocessing CSS
+            and more. This text discusses gulp, a build tool for automating
+            these tasks.
+          </p>
+        </article>
+      </section>
+      <!-- W H A T  I S  G U L P ? -->
+      <section class="main-section" id="What_is_gulp?">
+        <header>What is gulp?</header>
+        <article>
+          <p>
+            Gulp is a task runner that uses Node.js as a platform. Gulp purely
+            uses the JavaScript code and helps to run front-end tasks and
+            large-scale web applications. It builds system automated tasks like
+            CSS and HTML minification, concatenating library files, and
+            compiling the SASS files. These tasks can be run using Shell or Bash
+            scripts on the command line.
+          </p>
+        </article>
+      </section>
+      <!-- H O W  T O  S E T  U P  G U L P -->
+      <section class="main-section" id="How_to_set_up_gulp">
+        <header>How to set up gulp</header>
+        <article>
+          <p>Setting up gulp for the first time requires a few steps.</p>
+          <h3>Node</h3>
+          <p>
+            Gulp requires Node, and its package manager, npm, which installs the
+            gulp plugins.
+          </p>
+          <p>
+            If you don't already have Node and npm installed, you can install
+            them with Node Version Manager (nvm). This tool lets developers
+            install multiple versions of Node, and easily switch between them.
+          </p>
+          <aside class="note">
+           <strong>Note:</strong> If you have issues with a specific version of Node, you can
+            switch to another version with a single command.
+          </aside>
+          <p>
+            Nvm can then be used to install Node by running the following in the
+            command line:
+          </p>
+         <code class="codebox">nvm install node</code>
+          <p>
+            This also installs Node's package manager, npm. You can check that
+            these are both installed by running the following commands from the
+            command line:
+          </p>
+         <code class="codebox">node -v<br />npm -v </code>
+          <p>
+            If both commands return a version number, then the installations
+            were successful.
+          </p>
+          <h3>Gulp command line tool</h3>
+          <p>
+            Gulp's command line tool should also be installed globally so that
+            gulp can be executed from the command line. Do this by running the
+            following from the command line:
+          </p>
+         <code class="codebox"
+            >npm install --<span class="bluecode">global</span> gulp-cli</code
+          >
+          <h3>Creating a new project</h3>
+          <p>
+            Before installing gulp plugins, your application needs to be
+            initialized. Do this by running the following command line command
+            from within your project's working directory:
+          </p>
+         <code class="codebox">npm init</code>
+          <p>
+            This command begins the generation of a <strong>package.json</strong> file, prompting
+            you with questions about your application. For simplicity these can
+            all be left blank (either by skipping the prompts with the return
+            key or by using npm <code class="codehighlight">init -y</code> instead of the above command), but in
+            production you could store application metadata here. The file looks
+            like this (your values may be different):
+          </p>
+          <h4>package.json</h4>
+         <code class="codebox" dir="ltr" translate="no">
+            { <br>
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"name"</span>: <span class="greencode">"test"</span>,<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"version"</span>: <span class="greencode">"1.0.0"</span>,<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"description"</span>: <span class="greencode">""</span>,<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"main"</span>: <span class="greencode">"index.js"</span>,<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"scripts"</span>: {<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"test"</span>: <span class="greencode">"echo \"Error: no test specified\" && exit 1"</span><br />
+            },<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"author"</span>: <span class="greencode">""</span>,<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"license"</span>: <span class="greencode">"ISC"</span><br />
+            }
+           <!-- {<br />
+            <span class="greencode">"name"</span>: <span class="greencode">"test"</span>,<br />
+            <span class="greencode">"version"</span>: <span class="greencode">"1.0.0"</span>,<br />
+            <span class="greencode">"description"</span>: <span class="greencode">""</span>,<br />
+            <span class="greencode">"main"</span>: <span class="greencode">"index.js"</span>,<br />
+            <span class="greencode">"scripts"</span>: {<br />
+            <span class="greencode">"test"</span>: <span class="greencode">"echo \"Error: no test specified\" && exit 1"</span><br />
+            },<br />
+            <span class="greencode">"author"</span>: <span class="greencode">""</span>,<br />
+            <span class="greencode">"license"</span>: <span class="greencode">"ISC"</span><br />
+            } -->
+          </code>
+          <p>
+            Don't worry if you don't understand what all of these values
+            represent, they are not critical to learning gulp.
+          </p>
+          <p>
+            This file is used to track your project's packages. Tracking
+            packages like this allows for quick reinstallation of all the
+            packages and their dependencies in future builds (the <code class="codehighlight">npm install</code>
+            command will read <strong>package.json</strong> and automatically install everything
+            listed).
+          </p>
+          <aside class="note">
+            <strong>Note:</strong> It is a best practice not to push packages to version control
+            systems. It's better to use <strong>npm install</strong> and <strong>package.json</strong> to install
+            project packages locally.
+          </aside>
+          <h3>Installing packages</h3>
+          <p>
+            Gulp and Node rely on plugins (packages) for the majority of their
+            functionality. Node plugins can be installed with the following
+            command line command:
+          </p>
+         <code class="codebox">npm install pluginName --save-dev</code>
+          <p>
+            This command uses the npm tool to install the <code class="codehighlight">pluginName</code> plugin.
+            Plugins and their dependencies are installed in a <strong>node_modules</strong>
+            directory inside the project's working directory.
+          </p>
+          <p>The <code class="codehighlight">--save-dev</code> flag updates <strong>package.json</strong> with the new package.</p>
+          <p>
+            The first plugin that you want to install is gulp itself. Do this by
+            running the following command from the command line from within your
+            project's working directory:
+          </p>
+         <code class="codebox">npm install gulp --save-dev</code>
+          <p>
+            Gulp and its dependencies are then present in the the <strong>node_modules</strong>
+            directory (inside the project directory). The <strong>package.json</strong> file is
+            also updated to the following (your values may vary):
+          </p>
+          <h4>package.json</h4>
+         <code class="codebox">
+           {<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"name"</span>: <span class="greencode">"test"</span>,<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"version"</span>: <span class="greencode">"1.0.0"</span>,<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"description"</span>: <span class="greencode">""</span>,<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"main"</span>: <span class="greencode">"index.js"</span>,<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"scripts"</span>: {<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"test"</span>: <span class="greencode">"echo \"Error: no test specified\" && exit 1"</span><br />
+            },<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"author"</span>: <span class="greencode">""</span>,<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"license"</span>: <span class="greencode">"ISC"</span>,<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"devDependencies"</span>: {<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span><span class="greencode">"gulp"</span>: <span class="greencode">"^3.9.1"</span><br />
+            }<br />
+            }
+          </code>
+          <p>
+            Note that there is now a <code class="codehighlight">devDependencies</code> field with gulp and its
+            current version listed.
+          </p>
+          <h4>Gulpfile</h4>
+          <p>
+            Once packages are installed (in <strong>node_modules</strong>), you are ready to use
+            them. All gulp code is written in a <strong>gulpfile.js</strong> file. To use a
+            package, start by including it in <strong>gulpfile.js.</strong> The following code in
+            your gulpfile includes the gulp package that was installed in the
+            previous section:
+          </p>
+          <h4>gulpfile.js</h4>
+         <code class="codebox"
+            ><span class="bluecode">var</span> gulp =
+            <span class="bluecode">require</span>(<span class="greencode">'gulp'</span>);
+          </code>
+        </article>
+      </section>
+      <!-- C R E A T I N G  T A S K S  -->
+      <section class="main-section" id="Creating_tasks">
+        <header>Creating tasks</header>
+        <article>
+          <p>
+            Gulp tasks are defined in the <strong>gulpfile.js</strong> file using gulp.task. A
+            simple task looks like this:
+          </p>
+          <h4>gulpfile.js</h4>
+         <code class="codebox"
+            >gulp.task(<span class="greencode">'hello'</span>, <span class="bluecode">function</span>() {<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>console.log(<span class="greencode">'Hello, World!'</span>);<br />
+            });
+          </code>
+          <p>
+            This code defines a <code class="codehighlight">hello</code> task that can be executed by running the
+            following from the command line:
+          </p>
+         <code class="codebox">gulp hello</code>
+          <p>A common pattern for gulp tasks is the following:</p>
+          <ol>
+            <li>Read some source files using <code class="codehighlight">gulp.src</code></li>
+            <li>
+              Process these files with one or more functions using Node's pipe
+              functionality
+            </li>
+            <li>
+              Write the modified files to a destination directory (creating the
+              directory if doesn't exist) with <code class="codehighlight">gulp.dest</code>
+             <code class="codebox"
+                >gulp.task(<span class="greencode">'task-name'</span>, <span class="bluecode">function</span>()
+                {<br />
+                <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>gulp.src(<span class="greencode">'source-files'</span>) <span class="pinkcode">// 1</span><br />
+                <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>.pipe(gulpPluginFunction()) <span class="pinkcode">// 2</span><br />
+                <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>.pipe(gulp.dest(<span class="greencode">'destination'</span>)); <span class="pinkcode">// 3</span><br />
+                });
+              </code>
+            </li>
+          </ol>
+          <p>A complete gulpfile might look like this:</p>
+          <h4>gulpfile.js</h4>
+         <code class="codebox"
+            ><span class="pinkcode">// Include plugins</span><br />
+            <span class="bluecode">var</span> <span class="greencode">gulp</span> = require('gulp'); <span class="pinkcode">//
+            Required</span><br />
+            <span class="bluecode">var</span> <span class="greencode">pluginA</span> = <span class="bluecode">require</span>('pluginA');<br />
+            <span class="bluecode">var</span> <span class="greencode">pluginB</span> = <span class="bluecode">require</span></require>('pluginB');<br />
+            <span class="bluecode">var</span> <span class="greencode">pluginC</span> = <span class="bluecode">require</span>('pluginC');<br />
+            <br />
+            <span class="pinkcode">// Define tasks</span><br />
+            gulp.task(<span class="greencode">'task-A'</span>, <span class="bluecode">function</span>() {<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>gulp.src(<span class="greencode">'some-source-files'</span>)<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>.pipe(pluginA())<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>.pipe(gulp.dest(<span class="greencode">'some-destination'</span>));<br />
+            });<br />
+            <br />
+            gulp.task(<span class="greencode">'task-BC'</span>, <span class="bluecode">function</span>() {<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>gulp.src(<span class="greencode">'other-source-files'</span>)<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>.pipe(pluginB())<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>.pipe(pluginC())<br />
+            <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>.pipe(gulp.dest(<span class="greencode">'some-other-destination'</span>));<br />
+            });
+          </code>
+          <p>
+            Where each installed plugin is included with <code class="codehighlight">require()</code> and tasks are
+            then defined using functions from the installed plugins. Note that
+            functionality from multiple plugins can exist in a single task.
+          </p>
+        </article>
+      </section>
+      <!-- E X A M P L E S -->
+      <section class="main-section" id="Examples">
+        <header>Examples</header>
+        <article>
+          <p>Let's look at some examples.</p>
+          <h4>Uglify JavaScript</h4>
+          <p>
+            Uglifying (or minifying) JavaScript is a common developer chore. The
+            following steps set up a gulp task to do this for you (assuming
+            Node, npm, and the gulp command line tool are installed):
+          </p>
+          <ol>
+            <li>
+              Create a new project & <strong>package.json</strong> by running the following in
+              the command line (from the project's working directory):
+             <code class="codebox">npm init</code>
+            </li>
+            <li>
+              Install the gulp package by running the following in the command
+              line:
+             <code class="codebox">npm install gulp --save-dev</code>
+            </li>
+            <li>
+              Install the gulp-uglify package by running the following in the
+              command line:
+             <code class="codebox">npm install gulp-uglify --save-dev</code>
+            </li>
+            <li>
+              Create a <strong>gulpfile.js</strong> and add the following code to include gulp
+              and gulp-uglify:
+             <code class="codebox"> 
+                <span class="bluecode">var</span> gulp = <span class="bluecode">require</span>(<span class="greencode">'gulp'</span>);<br />
+                <span class="bluecode">var</span> uglify = <span class="bluecode">require</span>(<span class="greencode">'gulp-uglify'</span>);<br />
+              </code>
+            </li>
+            <li>
+              Define the uglify task by adding the following code to
+              <strong>gulpfile.js</strong>:
+             <code class="codebox"
+                >gulp.task(<span class="greencode">'uglify'</span>, <span class="bluecode">function</span>() {<br />
+                <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>gulp.src(<span class="greencode">'js/**/*.js'</span>)<br />
+                <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>.pipe(uglify())<br />
+                <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>.pipe(gulp.dest(<span class="greencode">'build'</span>));<br />
+                });
+              </code>
+            </li>
+            <li>
+              Run the task from the command line with the following:
+             <code class="codebox">gulp uglify</code>
+            </li>
+          </ol>
+          <p>
+            The task reads all JavaScript files in the <strong>js</strong> directory (relative to
+            the <strong>gulpfile.js</strong> file), executes the <code class="codehighlight">uglify</code> function on them
+            (uglifying/minifying the code), and then puts them in a <strong>build</strong>
+            directory (creating it if it doesn't exist).
+          </p>
+          <h4>Prefix CSS & build sourcemaps</h4>
+          <p>
+            Multiple plugins can be used in a single task. The following steps
+            set up a gulp task to prefix CSS files and create sourcemaps for
+            them (assuming Node, npm, and the gulp command line tool are
+            installed):
+          </p>
+          <ol>
+            <li>
+              As in the previous example, create a new project and install gulp,
+              gulp-autoprefixer, and gulp-sourcemaps by running the following in
+              the command line (from the project's working directory):
+             <code class="codebox"
+                >npm init<br />
+                npm install gulp --save-dev<br />
+                npm install gulp-autoprefixer --save-dev<br />
+                npm install gulp-sourcemaps --save-dev</code
+              >
+            </li>
+            <li>
+              Include the installed plugins by adding the following code to a
+              <strong>gulpfile.js</strong> file:
+             <code class="codebox">
+                <span class="bluecode">var</span> gulp = <span class="bluecode">require</span>(<span class="greencode">'gulp'</span>);<br />
+                <span class="bluecode">var</span> autoprefixer = <span class="bluecode">require</span>(<span class="greencode">'gulp-autoprefixer'</span>);<br />
+                <span class="bluecode">var</span> sourcemaps = <span class="bluecode">require</span>(<span class="greencode">'gulp-sourcemaps'</span>);
+              </code>
+            </li>
+            <li>
+              Create a task that prefixes CSS files, creates sourcemaps on the
+              files, and writes the new files to the <strong>build</strong> directory by adding
+              the following code to <strong>gulpfile.js</strong>:
+             <code class="codebox"
+                >gulp.task(<span class="greencode">'processCSS'</span>, <span class="bluecode">function</span>() {<br />
+                <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>gulp.src(<span class="greencode">'styles/**/*.css'</span>)<br />
+                <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>.pipe(sourcemaps.init())<br />
+                <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>.pipe(autoprefixer())<br />
+                <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>.pipe(sourcemaps.write())<br />
+                <span class="tabspacing">&nbsp;&nbsp;&nbsp;</span>.pipe(gulp.dest(<span class="greencode">'build'</span>));<br />
+                });
+              </code>
+            </li>
+          </ol>
+          <p>This task uses two plugins in the same task.</p>
+        </article>
+      </section>
+      <footer>coded by Jess Neil Basalo</footer>
+    </main>
+    
+  </body>
+</html>
