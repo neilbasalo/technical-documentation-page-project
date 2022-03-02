@@ -4,4 +4,4 @@
 
 You can check it out here:
 
-https://neilbasalo.github.io/technical-documentation-page/
+https://neilbasalo.github.io/technical-documentation-page-project/
